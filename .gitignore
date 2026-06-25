@@ -23,3 +23,7 @@ qrc_*.cpp
 # 日志与临时文件
 *.log
 .qmake.stash
+*.tar.bz2
+*.cswp
+*.swp
+
