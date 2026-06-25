@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>setup</class>
+ <widget class="QWidget" name="setup">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>模式设置</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+/* 全局 */
+QWidget#setup {
+    background-color: #d6e8f5;
+    border-radius: 16px;
+    font-family: &quot;Helvetica Neue&quot;,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif;
+}
+/* 卡片 */
+QFrame#leftCard, QFrame#rightCard {
+    background: #ffffff;
+    border: none;
+    border-radius: 14px;
+}
+/* 标题栏 */
+QWidget#leftTitleBar, QWidget#rightTitleBar {
+    background-color: #1a7bbd;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+QLabel#leftTitleText {
+    color: #ffffff; font-size: 14px; font-weight: 600; background: transparent; letter-spacing: 1px;
+}
+QLabel#rightTitle {
+    color: #ffffff; font-size: 13px; font-weight: 600; background: transparent;
+}
+/* 子模块标题 */
+QLabel#moduleTitle {
+    color: #333333; font-size: 14px; font-weight: 600; background: transparent;
+}
+/* 设置项标签 */
+QLabel#settingLabel {
+    color: #333333; font-size: 13px; font-weight: 500; background: transparent;
+}
+QLabel#settingDesc {
+    color: #888888; font-size: 11px; background: transparent;
+}
+/* 导航按钮 */
+QPushButton#nav1, QPushButton#nav2, QPushButton#nav3, QPushButton#nav4, QPushButton#nav5 {
+    background: transparent; border: none; text-align: left;
+    font-size: 13px; font-weight: 500; color: #333333; padding-left: 44px;
+}
+QPushButton#nav1:hover, QPushButton#nav2:hover, QPushButton#nav3:hover,
+QPushButton#nav4:hover, QPushButton#nav5:hover { background: #eef4fa; }
+/* 复选框 - iOS风格开关 */
+QCheckBox {
+    spacing: 8px; font-size: 12px; color: #333333;
+}
+QCheckBox::indicator {
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 2px solid #cccccc; background: #ffffff;
+}
+QCheckBox::indicator:checked {
+    border: 2px solid #1a7bbd; background: #1a7bbd;
+    image: url(:/images/icon_check.svg);
+}
+/* 开关式复选框 */
+QCheckBox#toggleCruise { spacing: 10px; font-size: 13px; color: #333333; }
+QCheckBox#toggleCruise::indicator {
+    width: 44px; height: 24px; border-radius: 12px;
+    border: none; background: #e0e0e0;
+}
+QCheckBox#toggleCruise::indicator:checked {
+    background: #34c759;
+}
+QCheckBox#toggleCruise::indicator:checked {
+    image: url(:/images/icon_toggle_on.svg);
+}
+/* 滑动条 */
+QSlider#speedSlider::groove:horizontal {
+    height: 6px; border-radius: 3px; background: #e0e0e0;
+}
+QSlider#speedSlider::handle:horizontal {
+    width: 20px; height: 20px; margin: -7px 0; border-radius: 10px;
+    background: #1a7bbd; border: none;
+}
+QSlider#speedSlider::sub-page:horizontal {
+    background: #1a7bbd; border-radius: 3px;
+}
+/* 下拉框 */
+QComboBox {
+    background: #f5f5f7; border: 1px solid #e0e0e0; border-radius: 6px;
+    padding: 6px 10px; font-size: 12px; color: #333333; min-width: 140px;
+}
+QComboBox:hover { border-color: #1a7bbd; }
+QComboBox::drop-down { border: none; width: 20px; }
+/* 时间输入框 */
+QTimeEdit {
+    background: #f5f5f7; border: 1px solid #e0e0e0; border-radius: 6px;
+    padding: 6px 10px; font-size: 12px; color: #333333; min-width: 90px;
+}
+QTimeEdit:hover { border-color: #1a7bbd; }
+/* 保存按钮 */
+QPushButton#saveBt {
+    background: #1a7bbd; border: none; border-radius: 8px;
+    color: #ffffff; font-size: 13px; font-weight: 500; padding: 10px 28px;
+}
+QPushButton#saveBt:hover { background: #155d94; }
+/* 恢复默认 */
+QPushButton#resetBt {
+    background: #ffffff; border: 1px solid #dddddd; border-radius: 8px;
+    color: #888888; font-size: 13px; font-weight: 500; padding: 10px 20px;
+}
+QPushButton#resetBt:hover { border-color: #bbbbbb; color: #555555; }
+/* 返回按钮 */
+QPushButton#backBt {
+    background: transparent; border: 1px solid rgba(26,123,189,0.25); border-radius: 14px;
+    color: #1a7bbd; font-size: 12px; font-weight: 500; text-align: center;
+}
+QPushButton#backBt:hover { background: rgba(26,123,189,0.06); border-color: rgba(26,123,189,0.5); }
+/* 子模块卡片 */
+QFrame#subCard {
+    background: transparent; border: 1px solid #f0f0f0; border-radius: 10px;
+}
+   </string>
+  </property>
+  <widget class="QFrame" name="leftCard">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>15</y>
+     <width>210</width>
+     <height>542</height>
+    </rect>
+   </property>
+   <widget class="QWidget" name="leftTitleBar" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>210</width>
+      <height>44</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="leftIcon">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>10</y>
+       <width>24</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="images.qrc">:/images/icon_settings.svg</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="leftTitleText">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>6</y>
+       <width>160</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>设置选项</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="nav1">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>52</y>
+      <width>210</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>巡航设置</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="nav2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>98</y>
+      <width>210</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>告警策略配置</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="nav3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>144</y>
+      <width>210</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>录像存储设置</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="nav4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>190</y>
+      <width>210</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>网络与设备管理</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="nav5">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>236</y>
+      <width>210</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>用户权限管理</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="backBt">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>473</y>
+      <width>131</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>  &lt; 返回主页</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QFrame" name="rightCard">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>15</y>
+     <width>769</width>
+     <height>542</height>
+    </rect>
+   </property>
+   <widget class="QWidget" name="rightTitleBar" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>769</width>
+      <height>44</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="rightIcon">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>10</y>
+       <width>24</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="images.qrc">:/images/icon_settings.svg</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="rightTitleText">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>6</y>
+       <width>200</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>巡航设置</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QStackedWidget" name="contentStack">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>44</y>
+      <width>769</width>
+      <height>498</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="pageCruise">
+     <widget class="QFrame" name="cruiseCard">
+      <property name="geometry">
+       <rect>
+        <x>16</x>
+        <y>14</y>
+        <width>737</width>
+        <height>204</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: #fafbfc; border: 1px solid #eeeeee; border-radius: 10px;</string>
+      </property>
+      <widget class="QWidget" name="cruiseTitleBar" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>737</width>
+         <height>36</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: #1a7bbd; border-top-left-radius: 10px; border-top-right-radius: 10px;</string>
+       </property>
+       <widget class="QLabel" name="cruiseTitle">
+        <property name="geometry">
+         <rect>
+          <x>14</x>
+          <y>6</y>
+          <width>120</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #ffffff; font-size: 13px; font-weight: 600; background: transparent;</string>
+        </property>
+        <property name="text">
+         <string>● 巡航设置</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="cruiseIcon">
+       <property name="geometry">
+        <rect>
+         <x>16</x>
+         <y>52</y>
+         <width>20</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="images.qrc">:/images/icon_target.svg</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="cruiseLabel">
+       <property name="geometry">
+        <rect>
+         <x>38</x>
+         <y>54</y>
+         <width>70</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #333; font-size: 13px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>自动巡航</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="toggleCruise">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>48</y>
+         <width>60</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="presetLabel">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>54</y>
+         <width>80</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #333; font-size: 13px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>巡航预置位</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="ckDoor">
+       <property name="geometry">
+        <rect>
+         <x>275</x>
+         <y>52</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>大门</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="ckWarehouse">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>52</y>
+         <width>70</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>仓库</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="ckParking">
+       <property name="geometry">
+        <rect>
+         <x>430</x>
+         <y>52</y>
+         <width>70</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>停车场</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="ckWall">
+       <property name="geometry">
+        <rect>
+         <x>510</x>
+         <y>52</y>
+         <width>60</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>围墙</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="speedIcon">
+       <property name="geometry">
+        <rect>
+         <x>16</x>
+         <y>108</y>
+         <width>20</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="images.qrc">:/images/icon_speed.svg</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="speedLabel">
+       <property name="geometry">
+        <rect>
+         <x>38</x>
+         <y>110</y>
+         <width>70</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #333; font-size: 13px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>巡航速度</string>
+       </property>
+      </widget>
+      <widget class="QSlider" name="speedSlider">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>110</y>
+         <width>240</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>10</number>
+       </property>
+       <property name="value">
+        <number>5</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="speedVal">
+       <property name="geometry">
+        <rect>
+         <x>348</x>
+         <y>108</y>
+         <width>30</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #1a7bbd; font-size: 16px; font-weight: bold; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>5</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="pageAlarm">
+     <widget class="QFrame" name="alarmCard">
+      <property name="geometry">
+       <rect>
+        <x>16</x>
+        <y>14</y>
+        <width>737</width>
+        <height>270</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: #fafbfc; border: 1px solid #eeeeee; border-radius: 10px;</string>
+      </property>
+      <widget class="QWidget" name="alarmTitleBar" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>737</width>
+         <height>36</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: #1a7bbd; border-top-left-radius: 10px; border-top-right-radius: 10px;</string>
+       </property>
+       <widget class="QLabel" name="alarmTitle">
+        <property name="geometry">
+         <rect>
+          <x>14</x>
+          <y>6</y>
+          <width>160</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #ffffff; font-size: 13px; font-weight: 600; background: transparent;</string>
+        </property>
+        <property name="text">
+         <string>告警策略配置</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QCheckBox" name="ckMotion">
+       <property name="geometry">
+        <rect>
+         <x>24</x>
+         <y>52</y>
+         <width>100</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>移动侦测</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="ckCover">
+       <property name="geometry">
+        <rect>
+         <x>24</x>
+         <y>84</y>
+         <width>100</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>画面遮挡</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="ckIntrude">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>52</y>
+         <width>100</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>区域入侵</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="ckStorage">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>84</y>
+         <width>130</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>存储空间不足</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="ckFace">
+       <property name="geometry">
+        <rect>
+         <x>500</x>
+         <y>52</y>
+         <width>120</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>人脸识别异常</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="linkIcon">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>130</y>
+         <width>20</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="images.qrc">:/images/icon_bell.svg</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="linkLabel">
+       <property name="geometry">
+        <rect>
+         <x>42</x>
+         <y>132</y>
+         <width>80</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #333; font-size: 13px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>告警联动</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="linkCombo">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>128</y>
+         <width>162</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>弹窗 + 声音</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>仅弹窗</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>仅声音</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>不联动</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="timeIcon">
+       <property name="geometry">
+        <rect>
+         <x>336</x>
+         <y>130</y>
+         <width>20</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="images.qrc">:/images/icon_clock.svg</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="timeLabel">
+       <property name="geometry">
+        <rect>
+         <x>358</x>
+         <y>132</y>
+         <width>100</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #333; font-size: 13px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>布防时间段</string>
+       </property>
+      </widget>
+      <widget class="QTimeEdit" name="timeStart">
+       <property name="geometry">
+        <rect>
+         <x>450</x>
+         <y>126</y>
+         <width>112</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="displayFormat">
+        <string>HH:mm</string>
+       </property>
+       <property name="time">
+        <time>
+         <hour>0</hour>
+         <minute>0</minute>
+         <second>0</second>
+        </time>
+       </property>
+      </widget>
+      <widget class="QLabel" name="toLabel">
+       <property name="geometry">
+        <rect>
+         <x>556</x>
+         <y>130</y>
+         <width>20</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #888; font-size: 12px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>至</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QTimeEdit" name="timeEnd">
+       <property name="geometry">
+        <rect>
+         <x>580</x>
+         <y>126</y>
+         <width>112</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="displayFormat">
+        <string>HH:mm</string>
+       </property>
+       <property name="time">
+        <time>
+         <hour>0</hour>
+         <minute>0</minute>
+         <second>0</second>
+        </time>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="resetBt">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>496</y>
+        <width>110</width>
+        <height>34</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>  恢复默认</string>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/images/icon_undo.svg</normaloff>:/images/icon_undo.svg</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>16</width>
+        <height>16</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="saveBt">
+      <property name="geometry">
+       <rect>
+        <x>628</x>
+        <y>496</y>
+        <width>110</width>
+        <height>34</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>  保存设置</string>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/images/icon_save.svg</normaloff>:/images/icon_save.svg</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>16</width>
+        <height>16</height>
+       </size>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="pageRecord">
+     <widget class="QLabel" name="recordPlaceholder">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>200</y>
+        <width>709</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #999999; font-size: 14px; background: transparent;</string>
+      </property>
+      <property name="text">
+       <string>录像存储设置</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="pageNetwork">
+     <widget class="QLabel" name="netPlaceholder">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>200</y>
+        <width>709</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #999999; font-size: 14px; background: transparent;</string>
+      </property>
+      <property name="text">
+       <string>网络与设备管理</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="pageUser">
+     <widget class="QLabel" name="userPlaceholder">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>200</y>
+        <width>709</width>
+        <height>60</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #999999; font-size: 14px; background: transparent;</string>
+      </property>
+      <property name="text">
+       <string>用户权限管理</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

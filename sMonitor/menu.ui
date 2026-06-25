@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>menu</class>
+ <widget class="QWidget" name="menu">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>小蚁智能安防系统</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+/* ===== 全局 ===== */
+QWidget#menu {
+    font-family: &quot;Helvetica Neue&quot;,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif;
+}
+
+/* ===== 视频区 ===== */
+QLabel#cap_Frame_lb {
+    background-color: #000000;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 18px;
+}
+
+/* ===== 控制面板 - Apple卡片风格 ===== */
+QStackedWidget#ctl_Panel_sw {
+    background: rgba(30,30,30,0.7);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+}
+
+/* ===== PTZ按钮 - 圆形胶囊 ===== */
+QPushButton#turn_up_bt,
+QPushButton#turn_down_bt,
+QPushButton#turn_left_bt,
+QPushButton#turn_right_bt {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+}
+QPushButton#turn_up_bt:hover,
+QPushButton#turn_down_bt:hover,
+QPushButton#turn_left_bt:hover,
+QPushButton#turn_right_bt:hover {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.3);
+}
+
+/* ===== 中心复位 ===== */
+QPushButton#turn_reset_bt {
+    background: rgba(255,59,48,0.2);
+    border: 1px solid rgba(255,59,48,0.4);
+    border-radius: 14px;
+}
+QPushButton#turn_reset_bt:hover {
+    background: rgba(255,59,48,0.35);
+}
+
+/* ===== 拍照/录像 ===== */
+QPushButton#get_photo_bt,
+QPushButton#get_vedio_bt {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+}
+QPushButton#get_photo_bt:hover,
+QPushButton#get_vedio_bt:hover {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.3);
+}
+
+/* ===== 底部导航 - Apple式粗圆角卡片 ===== */
+QPushButton#swt_Control_bt,
+QPushButton#exp_Check_bt,
+QPushButton#file_Manage_bt,
+QPushButton#mode_Setup_bt {
+    background: rgba(28,28,30,0.75);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 22px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    padding-top: 50px;
+}
+QPushButton#swt_Control_bt:hover,
+QPushButton#exp_Check_bt:hover,
+QPushButton#file_Manage_bt:hover,
+QPushButton#mode_Setup_bt:hover {
+    background: rgba(44,44,46,0.85);
+    border-color: rgba(255,255,255,0.2);
+}
+   </string>
+  </property>
+  <widget class="QLabel" name="cap_Frame_lb">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>68</y>
+     <width>654</width>
+     <height>362</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QStackedWidget" name="ctl_Panel_sw">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>70</y>
+     <width>314</width>
+     <height>362</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="page">
+    <widget class="QPushButton" name="turn_up_bt">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>22</y>
+       <width>74</width>
+       <height>54</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/icon_up.svg</normaloff>:/images/icon_up.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="turn_left_bt">
+     <property name="geometry">
+      <rect>
+       <x>36</x>
+       <y>94</y>
+       <width>74</width>
+       <height>54</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/icon_left.svg</normaloff>:/images/icon_left.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="turn_reset_bt">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>94</y>
+       <width>74</width>
+       <height>54</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/icon_center.svg</normaloff>:/images/icon_center.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="turn_right_bt">
+     <property name="geometry">
+      <rect>
+       <x>204</x>
+       <y>94</y>
+       <width>74</width>
+       <height>54</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/icon_right.svg</normaloff>:/images/icon_right.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="turn_down_bt">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>166</y>
+       <width>74</width>
+       <height>54</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/icon_down.svg</normaloff>:/images/icon_down.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="sepLine">
+     <property name="geometry">
+      <rect>
+       <x>24</x>
+       <y>240</y>
+       <width>266</width>
+       <height>1</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(255,255,255,0.08);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="get_photo_bt">
+     <property name="geometry">
+      <rect>
+       <x>46</x>
+       <y>264</y>
+       <width>94</width>
+       <height>72</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/icon_camera.svg</normaloff>:/images/icon_camera.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="get_vedio_bt">
+     <property name="geometry">
+      <rect>
+       <x>174</x>
+       <y>264</y>
+       <width>94</width>
+       <height>72</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/icon_video.svg</normaloff>:/images/icon_video.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_2">
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>82</x>
+       <y>140</y>
+       <width>150</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgba(255,255,255,0.6); font-size: 14px; font-weight: 400; background: transparent;</string>
+     </property>
+     <property name="text">
+      <string>手动控制</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="swt_Control_bt">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>450</y>
+     <width>231</width>
+     <height>128</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>切换自动</string>
+   </property>
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/icon_switch.svg</normaloff>:/images/icon_switch.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="exp_Check_bt">
+   <property name="geometry">
+    <rect>
+     <x>267</x>
+     <y>450</y>
+     <width>231</width>
+     <height>128</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>异常查看</string>
+   </property>
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/icon_alarm.svg</normaloff>:/images/icon_alarm.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="file_Manage_bt">
+   <property name="geometry">
+    <rect>
+     <x>514</x>
+     <y>450</y>
+     <width>231</width>
+     <height>128</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>文件管理</string>
+   </property>
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/icon_folder.svg</normaloff>:/images/icon_folder.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mode_Setup_bt">
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>450</y>
+     <width>243</width>
+     <height>128</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>模式设置</string>
+   </property>
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/icon_settings.svg</normaloff>:/images/icon_settings.svg</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,1 @@
+cmd_/opt/aicTrain/stENG_drv_temp/stENG_drv.ko := /usr/local/arm/ext-toolchain/bin/arm-cortex_a9-linux-gnueabi-ld -EL -r  -T /opt/emb-linux/linux-3.4.39/scripts/module-common.lds --build-id  -o /opt/aicTrain/stENG_drv_temp/stENG_drv.ko /opt/aicTrain/stENG_drv_temp/stENG_drv.o /opt/aicTrain/stENG_drv_temp/stENG_drv.mod.o

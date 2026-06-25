@@ -1,0 +1,25 @@
+# Qt Creator 产生的本地配置文件（包含绝对路径、本地编译器设置等，绝对不能上传）
+*.user
+*.user.*
+
+# 编译输出目录（预设的各类 shadow build 目录）
+build-*/
+/build/
+
+# 编译器生成的中间文件与目标文件
+*.o
+*.obj
+*.moc
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+*.a
+*.lib
+*.exe
+*.dll
+*.so
+*.dylib
+
+# 日志与临时文件
+*.log
+.qmake.stash

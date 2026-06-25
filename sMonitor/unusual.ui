@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>unusual</class>
+ <widget class="QWidget" name="unusual">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>异常事件处理</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+QWidget#unusual {
+    background-color: #d6e8f5;
+    border-radius: 16px;
+    font-family: &quot;Helvetica Neue&quot;,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif;
+}
+QFrame#leftCard, QFrame#rightCard {
+    background: #ffffff;
+}
+QWidget#leftTitleBar, QWidget#rightTitleBar {
+    background-color: #1a7bbd;
+}
+QLabel#leftTitleText, QLabel#rightTitleText {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    background: transparent;
+    letter-spacing: 1px;
+}
+QLabel#countText {
+    color: rgba(255,255,255,0.8);
+    font-size: 12px;
+    font-weight: 400;
+    background: transparent;
+}
+QLabel#badgeTotal {
+    background: #ff3b30;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 2px 8px;
+}
+/* 分类按钮 - 默认态 */
+QPushButton#catBtn1, QPushButton#catBtn2, QPushButton#catBtn3,
+QPushButton#catBtn4, QPushButton#catBtn5 {
+    background: transparent;
+    border: none;
+    border-radius: 0px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333333;
+    padding-left: 52px;
+    padding-top: 6px;
+}
+QPushButton#catBtn1:hover, QPushButton#catBtn2:hover, QPushButton#catBtn3:hover,
+QPushButton#catBtn4:hover, QPushButton#catBtn5:hover {
+    background: #eef4fa;
+}
+    color: #888888;
+    font-size: 11px;
+    background: transparent;
+}
+/* 分类徽标 - 颜色在代码中设置，这里只定义样式基类 */
+QLabel#badge1, QLabel#badge2 {
+    background: #ff3b30;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 1px 7px;
+}
+QLabel#badge3, QLabel#badge4 {
+    background: #ff9500;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 1px 7px;
+}
+QLabel#badge5 {
+    background: #007aff;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 1px 7px;
+}
+/* 指示色条 */
+QLabel#ind1, QLabel#ind2 { background: #ff3b30; }
+QLabel#ind3, QLabel#ind4 { background: #ff9500; }
+QLabel#ind5 { background: #007aff; }
+/* 表格 */
+QHeaderView::section {
+    background: #f2f4f7;
+    color: #555555;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 8px;
+}
+QTableWidget#eventTable {
+    background: #ffffff;
+    border: none;
+    font-size: 12px;
+    color: #333333;
+    gridline-color: #f0f0f0;
+    selection-background-color: #e8f0fe;
+}
+QTableWidget#eventTable::item {
+    padding: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+/* 返回按钮 - 简约线条风格 */
+QPushButton#backBt {
+    background: transparent;
+    border: 1px solid rgba(26,123,189,0.25);
+    border-radius: 14px;
+    color: #1a7bbd;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+}
+QPushButton#backBt:hover {
+    background: rgba(26,123,189,0.06);
+    border-color: rgba(26,123,189,0.5);
+}
+   </string>
+  </property>
+  <widget class="QFrame" name="leftCard">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>15</y>
+     <width>238</width>
+     <height>542</height>
+    </rect>
+   </property>
+   <widget class="QWidget" name="leftTitleBar" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>238</width>
+      <height>44</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="docIcon">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>10</y>
+       <width>24</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="images.qrc">:/images/icon_doc.svg</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="leftTitleText">
+     <property name="geometry">
+      <rect>
+       <x>42</x>
+       <y>6</y>
+       <width>140</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>待处理异常事件</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="badgeTotal">
+     <property name="geometry">
+      <rect>
+       <x>194</x>
+       <y>10</y>
+       <width>30</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="ind1">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>68</y>
+      <width>4</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="catIcon1">
+    <property name="geometry">
+     <rect>
+      <x>16</x>
+      <y>82</y>
+      <width>28</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="images.qrc">:/images/icon_alert.svg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="catBtn1">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>68</y>
+      <width>238</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>区域入侵检测</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="badge1">
+    <property name="geometry">
+     <rect>
+      <x>192</x>
+      <y>84</y>
+      <width>28</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ind2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>124</y>
+      <width>4</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="catIcon2">
+    <property name="geometry">
+     <rect>
+      <x>16</x>
+      <y>138</y>
+      <width>28</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="images.qrc">:/images/icon_alert.svg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="catBtn2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>124</y>
+      <width>238</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>人脸识别异常</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="badge2">
+    <property name="geometry">
+     <rect>
+      <x>192</x>
+      <y>140</y>
+      <width>28</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ind3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>180</y>
+      <width>4</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="catIcon3">
+    <property name="geometry">
+     <rect>
+      <x>16</x>
+      <y>194</y>
+      <width>28</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="images.qrc">:/images/icon_warning.svg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="catBtn3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>180</y>
+      <width>238</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>画面遮挡告警</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="badge3">
+    <property name="geometry">
+     <rect>
+      <x>192</x>
+      <y>196</y>
+      <width>28</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ind4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>236</y>
+      <width>4</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="catIcon4">
+    <property name="geometry">
+     <rect>
+      <x>16</x>
+      <y>250</y>
+      <width>28</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="images.qrc">:/images/icon_warning.svg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="catBtn4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>236</y>
+      <width>238</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>移动侦测告警</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="badge4">
+    <property name="geometry">
+     <rect>
+      <x>192</x>
+      <y>252</y>
+      <width>28</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ind5">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>292</y>
+      <width>4</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="catIcon5">
+    <property name="geometry">
+     <rect>
+      <x>16</x>
+      <y>306</y>
+      <width>28</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="images.qrc">:/images/icon_info.svg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="catBtn5">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>292</y>
+      <width>238</width>
+      <height>52</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>存储空间不足</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="badge5">
+    <property name="geometry">
+     <rect>
+      <x>192</x>
+      <y>308</y>
+      <width>28</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QFrame" name="rightCard">
+   <property name="geometry">
+    <rect>
+     <x>268</x>
+     <y>15</y>
+     <width>741</width>
+     <height>542</height>
+    </rect>
+   </property>
+   <widget class="QWidget" name="rightTitleBar" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>741</width>
+      <height>44</height>
+     </rect>
+    </property>
+    <widget class="QLabel" name="rightIcon">
+     <property name="geometry">
+      <rect>
+       <x>14</x>
+       <y>10</y>
+       <width>24</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="images.qrc">:/images/icon_warning.svg</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="rightTitleText">
+     <property name="geometry">
+      <rect>
+       <x>44</x>
+       <y>6</y>
+       <width>240</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="countText">
+     <property name="geometry">
+      <rect>
+       <x>660</x>
+       <y>10</y>
+       <width>70</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QTableWidget" name="eventTable">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>44</y>
+      <width>741</width>
+      <height>498</height>
+     </rect>
+    </property>
+    <property name="columnCount">
+     <number>5</number>
+    </property>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>140</number>
+    </attribute>
+    <attribute name="horizontalHeaderMinimumSectionSize">
+     <number>40</number>
+    </attribute>
+    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>false</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>截图</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>事件类型</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>等级</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>触发时间</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>状态</string>
+     </property>
+    </column>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="backBt">
+   <property name="geometry">
+    <rect>
+     <x>53</x>
+     <y>490</y>
+     <width>151</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>  &lt; 返回主页</string>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
+ <connections/>
+</ui>
